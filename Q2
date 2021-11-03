@@ -1,0 +1,38 @@
+#!/usr/local/bin/python3
+
+#dna = "ATGCATCATG"
+#k = 2
+#offset = 1
+#n = 2
+#segment_starts=list(range(0,len(dna),offset))
+
+#segments_made=[]
+#for seg_bits in segment_starts :
+	#kmers = dna[seg_bits : seg_bits+k].upper()
+	#segments_made = segments_made + [kmers]
+	#print(len(segments_made), kmers)
+
+sequencein = "atatatatatcgcgtatatatacgactatatgcattaattatagcatatcgatatatatatcgatattatatcgcattatacgcgcgtaattatatc"
+
+#list(range(2,int(len(sequencein)-1)))
+
+possible_kmer_sizes = list(range(2,7))
+kmerfound_min = 3
+
+for window in possible_kmer_sizes :
+	kmersfound = []
+	kmerrange = list(range(0,len(sequencein)))
+	for startingbase in kmerrange :
+		if (startingbase + window) < len(sequencein) + 1 :
+			seqout = (sequencein)[startingbase : startingbase + window]
+			kmersfound = kmersfound + [seqout]
+	nonredundantset = list(set(kmersfound))
+	for kmerfrequencies in nonredundantset :
+		if kmersfound.count(kmerfrequencies) > kmerfound_min :
+			print('Lots!'+str(kmerfrequencies)+' '+str(kmersfound.count(kmerfrequencies)))
+		else :
+			print(str(kmerfrequencies)+' '+str(kmersfound.count(kmerfrequencies)))
+
+#sequencein = input("Please enter the raw DNA sequence you want to analyse\n").upper()
+#print("Thanks for entering the sequence",sequencein,"(which is",len(sequencein),"characters long)")
+

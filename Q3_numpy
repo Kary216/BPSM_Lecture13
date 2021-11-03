@@ -1,0 +1,27 @@
+#!/usr/local/bin/python3
+
+input_seqs = ['ATTGTACGG', 'AATGAACCG', 'AATGAACCC', 'AATGGGAAT']
+s = ''
+myseqs = s.join(str(e) for e in input_seqs)
+
+import numpy as np
+IDmatrix = np.eye(len(myseqs), dtype = int)
+
+xcounter = 0
+
+for xbase in myseqs :
+	xcounter += 1
+	ycounter = 0
+	for ybase in myseqs :
+		ycounter += 1
+		print(xcounter, ycounter, xbase, ybase)
+		if ybase == xbase :
+			IDmatrix[(xcounter-1), (ycounter-1)] = 1
+
+print("The similarity was",int((IDmatrix[0:9,9:18].diagonal().sum()/9)*100),"percent")
+
+# sum of columns
+IDmatrix.sum(axis=0)
+
+# sum of rows (same as above in this case)
+IDmatrix.sum(axis=1)

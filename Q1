@@ -1,0 +1,42 @@
+#!/usr/local/bin/python3
+
+import csv
+
+with open('data.csv', mode='r') as data :
+	csvData = csv.reader(data)
+	for lines in csvData :
+		print(lines)
+
+with open('data.csv', mode='r') as data :
+	csvData = csv.reader(data)
+	for lines in csvData :
+		if lines[0] == 'Drosophila melanogaster' or lines[0] == 'Drosophila simulans' :
+			print(lines[0], lines[2])
+
+with open('data.csv', mode='r') as data :
+	csvData = csv.reader(data)
+	for lines in csvData :
+		if len(lines[1]) > 90 and len(lines[1]) < 110 :
+			print('90-110 bases long: ', lines[2])
+
+with open('data.csv', mode='r') as data :
+	csvData = csv.reader(data)
+	for lines in csvData :
+		if (lines[1].count('a')+lines[1].count('t'))/len(lines[1]) < 0.5 and int(lines[3]) > 200 :
+			print('AT < 0.5 and expression > 200: ', lines[2])
+
+with open('data.csv', mode='r') as data :
+	csvData = csv.reader(data)
+	for lines in csvData :
+		if lines[0] != 'Drosophila melanogaster' and lines[2].startswith('k') or lines[2].startswith('h') :
+			print(lines[2])
+
+with open('data.csv', mode='r') as data :
+	csvData = csv.reader(data)
+	for lines in csvData :
+		if (lines[1].count('a')+lines[1].count('t'))/len(lines[1]) > 0.65 :
+			print(lines[2], ' AT content is high')
+		elif (lines[1].count('a')+lines[1].count('t'))/len(lines[1]) < 0.45 :
+			print(lines[2], ' AT content is low')
+		else :
+			print(lines[2], ' AT content is medium')
